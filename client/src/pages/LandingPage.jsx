@@ -70,35 +70,8 @@ export default function LandingPage() {
   const [isScanning, setIsScanning] = useState(false);
   const [showScanResult, setShowScanResult] = useState(true);
 
-  // Intersection Observer scroll reveal & parallax floating mouse move effect
+  // Parallax floating mouse move effect & micro-interactions
   useEffect(() => {
-    // 1. Intersection Observer for scroll reveal
-    const observerOptions = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // 2. Parallax effect for floating cards
-    const handleMouseMove = (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 20;
-      const y = (e.clientY / window.innerHeight - 0.5) * 20;
-      
-      document.querySelectorAll('[class*="floating-card"]').forEach((el, index) => {
-        const factor = (index + 1) * 0.4;
-        el.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
-      });
-    };
-
     // 3. Custom micro-interaction for icon scaling on glass-cards
     const glassCards = document.querySelectorAll('.glass-card');
     const hoverListeners = [];
@@ -119,11 +92,7 @@ export default function LandingPage() {
       }
     });
 
-    window.addEventListener('mousemove', handleMouseMove);
-
     return () => {
-      observer.disconnect();
-      window.removeEventListener('mousemove', handleMouseMove);
       hoverListeners.forEach(({ card, enterHandler, leaveHandler }) => {
         card.removeEventListener('mouseenter', enterHandler);
         card.removeEventListener('mouseleave', leaveHandler);
@@ -183,8 +152,7 @@ export default function LandingPage() {
       </header>
 
       <main>
-        {/* Hero Section */}
-        <section className="relative min-h-[921px] flex flex-col justify-center px-6 md:px-margin-desktop py-20">
+        <section className="relative min-h-[650px] md:min-h-[720px] flex flex-col justify-center px-6 md:px-margin-desktop py-16 md:py-24">
           <div className="grid lg:grid-cols-2 gap-16 items-center container-max mx-auto">
             <div className="z-20">
               <h1 className="font-display-lg text-headline-lg-mobile md:text-display-lg text-on-surface mb-6 leading-tight">

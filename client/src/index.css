@@ -9,28 +9,16 @@
     padding: 0;
   }
 
-  html {
-    scroll-behavior: smooth;
+  html, body {
+    scroll-behavior: auto !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
   }
 
   body {
     @apply bg-black font-sans antialiased;
     color: #e5e2e1;
     background-color: #000000;
-  }
-
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #0e0e0e;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #2a2a2a;
-    border-radius: 4px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #4edea3;
   }
 }
 
@@ -162,16 +150,10 @@
     z-index: -1;
   }
 
-  /* Reveal on scroll */
+  /* Reveal on scroll - disabled for a natural and instant scrolling experience */
   .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .reveal.active {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 
   /* Inputs custom style */

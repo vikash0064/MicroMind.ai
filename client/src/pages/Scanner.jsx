@@ -168,13 +168,22 @@ export default function Scanner() {
       <section className="flex-1 m-4 md:m-6 rounded-3xl overflow-hidden relative glass-panel glass-border shadow-2xl flex flex-col items-center justify-center bg-surface-container-lowest/30 min-h-[300px] md:min-h-0 select-none">
         
         {/* Enclosed Viewfield Image */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 bg-black">
           <img
             alt="Visual Canvas"
-            className="w-full h-full object-cover grayscale-[15%] contrast-[105%] transition-all duration-700"
+            className={`w-full h-full object-cover transition-all duration-700 ${
+              imagePreview
+                ? 'grayscale-0 brightness-110 contrast-100'
+                : 'grayscale-[15%] contrast-[105%]'
+            }`}
             src={imagePreview || "https://lh3.googleusercontent.com/aida-public/AB6AXuBPils-MoIQT-W6Irl9PGq-h1-D-IUitrC6l1m0aU1kQPLfEtZuvwg9O8AH26kDi5009QwFenuwdb_7Se8WMrjAGzOyItp_LjMNFUbpWzRV1QgjdB1dnGGZuZd4_YZ_sk0ajl2F4zRF5AZ9Jcn_4v0kG4zqXJV94jNoIjnMo63aldUXXX9A_7FtUR2FbbfAKnh2oglxR3OgYacGM_0zhDP7Z_lbpQeMUKH5KbbmzAD45spWTGbIg2jvupkXTVxlMzk4HDIk1lsyLus"}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/80"></div>
+          {/* Subtle vignette/overlay only if placeholder is shown, otherwise a very light clear overlay for user uploads */}
+          {imagePreview ? (
+            <div className="absolute inset-0 bg-black/10"></div>
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/80"></div>
+          )}
         </div>
 
         {/* Phase 1: Upload Widget staged inside the Frame */}
